@@ -8,6 +8,7 @@ public class Counter : MonoBehaviour
     [SerializeField] private int _timeDelay = 1;
 
     public event Action OnValueChanged;
+
     public int ChangeableNumber { get; private set; } = 0;
 
     private Coroutine _coroutine;
