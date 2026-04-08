@@ -8,20 +8,17 @@ public class View : MonoBehaviour
 
     private void OnEnable()
     {
-        _counter.OnValueChanged += UpdateCounterDisplay;
+        _counter.ValueChanged += UpdateCounterDisplay;
     }
 
     private void OnDisable()
     {
-        _counter.OnValueChanged -= UpdateCounterDisplay;
+        _counter.ValueChanged -= UpdateCounterDisplay;
     }
 
     private void UpdateCounterDisplay()
     {
-        if (_text != null)
-        {
-            int number = _counter.ChangeableNumber;
-            _text.text = number.ToString();
-        }
+        int number = _counter.ChangeableNumber;
+        _text.text = number.ToString();
     }
 }

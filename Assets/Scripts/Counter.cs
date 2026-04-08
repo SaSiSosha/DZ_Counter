@@ -7,22 +7,22 @@ public class Counter : MonoBehaviour
     [SerializeField] private float _increasingValue = 0.5f;
     [SerializeField] private int _timeDelay = 1;
 
-    public event Action OnValueChanged;
-
-    public int ChangeableNumber { get; private set; } = 0;
-
     private Coroutine _coroutine;
     private bool isCounting = false;
+
+    public event Action ValueChanged;
+
+    public int ChangeableNumber { get; private set; } = 0;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            ToggleCounter();
+            ChangeValue();
         }
     }
 
-    private void ToggleCounter()
+    private void ChangeValue()
     {
         if (isCounting == false)
         {
@@ -43,12 +43,12 @@ public class Counter : MonoBehaviour
 
     private IEnumerator IncreaseValue()
     {
-        var wait = new WaitForSeconds(0.5f);
+        var wait = new WaitForSeconds(_increasingValue);
 
         while (isCounting)
         {
             ChangeableNumber += _timeDelay;
-            OnValueChanged?.Invoke();
+            ValueChanged?.Invoke();
 
             yield return wait;
         }
